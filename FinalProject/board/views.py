@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
@@ -115,8 +115,17 @@ class CommentReject(IsAuthorMixin, View):
 
 
 class CommentDelete(DeleteView):
-    pass
+    model = Comment
+    template_name = 'board/comment_delete.html'
+    success_url = reverse_lazy('board:home')  # Замените 'board:home' на ваш путь для перехода после удаления
 
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)  # Если пользователь пытается получить страницу удаления, перенаправляем его к выполнению удаления
+
+    def delete(self, request, *args, **kwargs):
+        comment = self.get_object()
+        comment.delete()
+        return redirect(self.success_url)
 
 class MyComments(View):
     def get(self, request, *args, **kwargs):

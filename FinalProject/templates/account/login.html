@@ -1,0 +1,78 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block content %}
+<div class="modal-dialog" role="document" xmlns="http://www.w3.org/1999/html">
+    <div class="modal-content rounded-5 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <!-- <h5 class="modal-title">Modal title</h5> -->
+        <h2 class="fw-bold mb-0">Авторизация</h2>
+          <a href="{% url 'newsboard:home' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form class="login" method="POST" action="{% url 'account_login' %}">
+          {% csrf_token %}
+
+          <div class="form-floating mb-3">
+<!--            <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">-->
+<!--            <label for="floatingInput">Email address</label>-->
+              {{ form.login }}
+              {{ form.login.label_tag }}
+              {% if form.login.errors %}
+                  <div class="alert alert-danger mt-2" role="alert">
+                    {{ form.login.errors }}
+                  </div>
+              {% endif %}
+          </div>
+          <div class="form-floating mb-3">
+<!--            <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">-->
+<!--            <label for="floatingPassword">Password</label>-->
+              {{ form.password }}
+              {{ form.password.label_tag }}
+              {% if form.password.errors %}
+                  <div class="alert alert-danger mt-2" role="alert">
+                    {{ form.password.errors }}
+                  </div>
+              {% endif %}
+              {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+          </div>
+
+<!--        buttons -->
+          <button type="submit" class="w-50 mb-2 btn btn-lg btn-outline-primary">
+              Войти
+          </button>
+          <a href="{% url 'account_reset_password' %}">
+              <button type="button" class="w-50 mb-2 btn btn-lg btn-primary float-end">
+                  Забыли пароль?
+              </button>
+          </a>
+          <a href="{{ signup_url }}">
+              <button type="button" class="w-100 mb-2 btn btn-lg rounded-4 btn btn-outline-primary">
+                  Регистрация
+              </button>
+          </a>
+<!--         endbuttons -->
+
+          {% get_providers as socialaccount_providers %}
+          {% if socialaccount_providers %}
+<!--          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>-->
+          <hr class="my-4">
+          <h2 class="fs-5 fw-bold mb-3">Или:</h2>
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% endblock %}

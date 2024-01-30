@@ -1,0 +1,25 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Please verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+            <div class="px-4 py-5 my-5 text-center">
+                <h1 class="display-5 fw-bold">{% trans "Please verify Your E-mail Address" %}</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">
+                        {% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="{% url 'board:home' %}">
+                            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+                                К новостям
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+    <p></p>
+
+{% endblock %}

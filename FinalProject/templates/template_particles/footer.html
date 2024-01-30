@@ -1,0 +1,14 @@
+{% load menu %}
+
+
+<div class="container">
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          {% get_items_for_menu request as get_items_for_menu %}
+          {% for item in get_items_for_menu %}
+                <li><a href="{% url item.url_name %}" class="nav-link px-2 link-secondary">{{ item.title }}</a></li>
+          {% endfor %}
+    </ul>
+    <p class="text-center text-muted">© Сайт создан в 2024 году</p>
+  </footer>
+</div>

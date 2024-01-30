@@ -117,10 +117,10 @@ class CommentReject(IsAuthorMixin, View):
 class CommentDelete(DeleteView):
     model = Comment
     template_name = 'board/comment_delete.html'
-    success_url = reverse_lazy('board:home')  # Замените 'board:home' на ваш путь для перехода после удаления
+    success_url = reverse_lazy('board:home')
 
     def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)  # Если пользователь пытается получить страницу удаления, перенаправляем его к выполнению удаления
+        return self.post(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         comment = self.get_object()

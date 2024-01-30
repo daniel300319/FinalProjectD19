@@ -3,7 +3,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
-from FinalProject.board.models import Comment
+from .models import Comment
 
 
 @receiver(post_save, sender=Comment)

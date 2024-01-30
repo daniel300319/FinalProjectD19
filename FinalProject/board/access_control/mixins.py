@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 
-from FinalProject.board.models import Post
+from ..models import Post
+
 
 
 class IsAuthorMixin(LoginRequiredMixin):

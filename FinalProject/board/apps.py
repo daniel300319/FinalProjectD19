@@ -6,4 +6,5 @@ class BoardConfig(AppConfig):
     name = 'board'
 
     def ready(self):
-        import FinalProject.board.signals
+        from . import signals
+

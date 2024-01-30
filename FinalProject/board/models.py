@@ -1,10 +1,21 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth import get_user_model
 from django.db import models
-from .forms import PostCreateForm
+
 User = get_user_model()
 
-CATEGORIES = PostCreateForm.CATEGORIES
+CATEGORIES = (
+        ('tanks', 'Танки'),
+        ('healers', 'Хилы'),
+        ('damage_dealers', 'ДД'),
+        ('merchants', 'Торговцы'),
+        ('guild_masters', 'Гилдмастеры'),
+        ('quest_givers', 'Квестгиверы'),
+        ('blacksmiths', 'Кузнецы'),
+        ('tanners', 'Кожевники'),
+        ('potion_makers', 'Зельевары'),
+        ('spell_masters', 'Мастера заклинаний'),
+    )
 
 class Post(models.Model):
     title = models.CharField('Заголовок', max_length=256)

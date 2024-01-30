@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'board.apps.boardConfig',
-    'auth.apps.AuthenticationConfig',
+    'board',
+    'authentication.apps.AuthenticationConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -54,6 +54,7 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'd.agur'
 EMAIL_HOST_PASSWORD = 'eexpuoqeihoolxms'
+EMAIL_USE_SSL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,7 +74,7 @@ SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -167,7 +168,7 @@ STATICFILES_DIRS = [STATIC_DIR]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, )
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
